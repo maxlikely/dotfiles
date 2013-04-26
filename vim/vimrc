@@ -1,0 +1,157 @@
+execute pathogen#infect()
+
+au FocusLost * silent! wa
+"autocmd!
+
+"""""""""""""""""""""
+" General settings ""
+"""""""""""""""""""""
+syntax enable
+"let g:solarized_termcolors = 256
+"let g:solarized_visibility = "high"
+colorscheme solarized
+call togglebg#map("<F5>")
+
+set history=50
+
+set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+set shiftround
+set autoindent
+set formatoptions-=t
+set textwidth=80
+set relativenumber
+
+set mouse=a
+set nowrap
+set showmode
+set showcmd
+
+set ignorecase
+set smartcase
+set incsearch
+set gdefault
+
+set undofile
+set undodir=/tmp/undos
+
+set foldenable
+set foldmethod=indent
+
+set matchpairs+=<:>
+
+" TODO consider deleting this
+set whichwrap=h,l,~,[,]
+
+noremap <Space> <PageDown>
+noremap - <PageUp>
+
+nnoremap <C-N> :next<CR>
+nnoremap <C-P> :prev<CR>
+
+set winminheight=0
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+
+set backspace=eol,start,indent
+
+let mapleader = ","
+nnoremap <leader>. :CtrlPTag<cr>
+" Copy to OSX clipboard and make copying a little neater
+noremap <leader>y "*y
+noremap <leader>h :set hlsearch!<CR>
+noremap <leader>yy "*Y
+noremap Y y$
+vnoremap <C-T> >
+vnoremap <C-D> <LT>
+vmap <Tab> <C-T>
+vmap <S-Tab> <C-D>
+
+
+"""""""""""""""""""""""""""
+" IDE -- tagbar, NERDTree "
+"""""""""""""""""""""""""""
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
+let g:tagbar_width=26                          " Default is 40, seems too wide
+nmap <silent> <leader>n :NERDTreeToggle<CR>
+nmap <silent> <leader>T :TagbarToggle<CR>
+nmap <silent> <leader>t :TagbarOpenAutoClose<CR>
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
+
+""""""""""""""""""""""""""
+" Shortcuts and commands "
+""""""""""""""""""""""""""
+nnoremap <leader>q gqip
+nnoremap Q gqap
+vnoremap Q gq
+
+imap jf <Esc>
+imap jo <Esc>O
+imap ZZ <Esc>:wq
+
+" save a file after forgetting to sudo
+cmap w!! %!sudo tee > /dev/null %
+
+" Python
+map <leader>g :w<CR>:!python % <CR>
+
+" plugins
+map <leader>r :RainbowParenthesesToggle<cr>
+
+" F1 more useful
+nnoremap <F1> :help<Space>
+vmap <F1> <C-C><F1>
+omap <F1> <C-C><F1>
+map! <F1> <C-C><F1>
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc     
+
+
+""""""""""""""""""""""""""
+" File formatting
+""""""""""""""""""""""""""
+
+filetype on
+filetype plugin indent on
+
+autocmd FileType mail,human,txt set formatoptions+=t textwidth=79 fo=aw2tq
+autocmd FileType c,cpp,slang,java set cindent
+autocmd FileType c set formatoptions+=ro
+autocmd FileType css set smartindent
+autocmd FileType tex,latex set smartindent
+autocmd FileType html set formatoptions+=tl
+autocmd FileType html,css set noexpandtab tabstop=2
+autocmd FileType make set noexpandtab shiftwidth=8
+autocmd FileType m set shiftround autoindent
+
+let g:Tex_ViewRule_pdf = 'Preview'
+let g:Tex_MultipleCompileFormats = 'dvi,pdf'
+
+""""""""""""""""""""""""
+" NOT MINE
+""""""""""""""""""""""""
+
+" remember all of these between sessions, but only 10 search terms; also
+" remember info for 10 files, but never any on removable disks, don't remember
+" marks in files, don't rehighlight old search patterns, and only save up to
+" 100 lines of registers; including @10 in there should restrict input buffer
+" but it causes an error for me:
+set viminfo=/10,'10,r/mnt/zip,r/mnt/floppy,f0,h,\"100
+set wildmode=list:longest,full
+
+" when using list, keep tabs at their full width and display `arrows':
+" (Character 187 is a right double-chevron, and 183 a mid-dot.)
+execute 'set listchars+=tab:' . nr2char(187) . nr2char(183)
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+"Invisible character colors
+highlight NonText guifg=#4a4a59
+highlight SpecialKey guifg=#4a4a59

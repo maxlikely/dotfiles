@@ -1,0 +1,8 @@
+set guifont=Menlo\ Regular:h12
+set guioptions=egmt
+
+set background=dark
+colorscheme solarized
+
+set fuopt=maxvert,maxhorz
+
