@@ -1,7 +1,134 @@
+filetype on
+filetype off
 execute pathogen#infect()
 
 au FocusLost * silent! wa
 "autocmd!
+
+" START NEOCOMPLCACHE
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Enable heavy features.
+" Use camel case completion.
+"let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+"let g:neocomplcache_enable_underbar_completion = 1
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
+
+" For cursor moving in insert mode(Not recommended)
+"inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
+"inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
+"inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
+"inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
+" Or set this.
+"let g:neocomplcache_enable_cursor_hold_i = 1
+" Or set this.
+"let g:neocomplcache_enable_insert_char_pre = 1
+
+" AutoComplPop like behavior.
+"let g:neocomplcache_enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplcache_enable_auto_select = 1
+"let g:neocomplcache_disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" /END neocomplcache
+" start unite
+"let g:unite_source_menu_menus.git = {
+"    \ 'description' : '            gestionar repositorios git
+"        \                            ⌘ [espacio]g',
+"    \}
+"let g:unite_source_menu_menus.git.command_candidates = [
+"    \['▷ tig                                                        ⌘ ,gt',
+"        \'normal ,gt'],
+"    \['▷ git status       (Fugitive)                                ⌘ ,gs',
+"        \'Gstatus'],
+"    \['▷ git diff         (Fugitive)                                ⌘ ,gd',
+"        \'Gdiff'],
+"    \['▷ git commit       (Fugitive)                                ⌘ ,gc',
+"        \'Gcommit'],
+"    \['▷ git log          (Fugitive)                                ⌘ ,gl',
+"        \'exe "silent Glog | Unite quickfix"'],
+"    \['▷ git blame        (Fugitive)                                ⌘ ,gb',
+"        \'Gblame'],
+"    \['▷ git stage        (Fugitive)                                ⌘ ,gw',
+"        \'Gwrite'],
+"    \['▷ git checkout     (Fugitive)                                ⌘ ,go',
+"        \'Gread'],
+"    \['▷ git rm           (Fugitive)                                ⌘ ,gr',
+"        \'Gremove'],
+"    \['▷ git mv           (Fugitive)                                ⌘ ,gm',
+"        \'exe "Gmove " input("destino: ")'],
+"    \['▷ git push         (Fugitive, salida por buffer)             ⌘ ,gp',
+"        \'Git! push'],
+"    \['▷ git pull         (Fugitive, salida por buffer)             ⌘ ,gP',
+"        \'Git! pull'],
+"    \['▷ git prompt       (Fugitive, salida por buffer)             ⌘ ,gi',
+"        \'exe "Git! " input("comando git: ")'],
+"    \['▷ git cd           (Fugitive)',
+"        \'Gcd'],
+"    \]
+"nnoremap <silent>[menu]g :Unite -silent -start-insert menu:git<CR>
+" end unite
 
 """""""""""""""""""""
 " General settings ""
@@ -9,12 +136,17 @@ au FocusLost * silent! wa
 syntax enable
 "let g:solarized_termcolors = 256
 "let g:solarized_visibility = "high"
+set background=light
+" solarized options 
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
 colorscheme solarized
 call togglebg#map("<F5>")
 
 set history=50
 
-set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+"set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 set shiftround
 set autoindent
 set formatoptions-=t
@@ -49,32 +181,54 @@ nnoremap <C-N> :next<CR>
 nnoremap <C-P> :prev<CR>
 
 set winminheight=0
+map <C-K> <C-W>k<C-W>_ 
 map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
 
 set backspace=eol,start,indent
 
+abbr ifmain if __name__ == '__main__':
+abbr generaleng hhwu, jon.bender, msmith, zack, mohit.singh, john.gaunt, kevin.shiue, dana.powers
+abbr searchers zack, dana.powers
+abbr scientists hhwu, dana.powers, mohit.singh, elaine.mao
+abbr reverberators hhwu, ds, dana.powers, mohit.singh, jon.bender, vanessa.li, elaine.mao
+abbr dml # XXX: David remove me!
+abbr todo # XXX
+abbr td # XXX
+abbr pdb import pdb; pdb.set_trace()
+abbr pudb import pudb; pudb.set_trace()
 let mapleader = ","
-nnoremap <leader>. :CtrlPTag<cr>
+"if $TMUX == ''
+"      set clipboard+=unnamed
+"endif
+set clipboard=unnamed
+"nnoremap <leader>. :CtrlPTag<cr>
+
+" Quick fix shortcuts
+nnoremap <leader>c :cw<cr>
+nnoremap <leader>cn :cnext<cr>
+nnoremap <leader>cp :cprev<cr>
+nnoremap <leader>cc :ccl<cr>
+
 " Copy to OSX clipboard and make copying a little neater
-noremap <leader>y "*y
 noremap <leader>h :set hlsearch!<CR>
-noremap <leader>yy "*Y
 noremap Y y$
 vnoremap <C-T> >
 vnoremap <C-D> <LT>
 vmap <Tab> <C-T>
 vmap <S-Tab> <C-D>
+noremap td A # XXX
 
 
 """""""""""""""""""""""""""
 " IDE -- tagbar, NERDTree "
 """""""""""""""""""""""""""
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
-let g:tagbar_width=26                          " Default is 40, seems too wide
+"let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
+let g:tagbar_width=34                          " Default is 40, seems too wide
+set tags=./tags,tags;/
 nmap <silent> <leader>n :NERDTreeToggle<CR>
 nmap <silent> <leader>T :TagbarToggle<CR>
 nmap <silent> <leader>t :TagbarOpenAutoClose<CR>
+nmap <silent> <leader>v :VimroomToggle<CR>
 let g:tagbar_type_markdown = {
     \ 'ctagstype' : 'markdown',
     \ 'kinds' : [
@@ -91,8 +245,9 @@ nnoremap <leader>q gqip
 nnoremap Q gqap
 vnoremap Q gq
 
+" basic commands
 imap jf <Esc>
-imap jo <Esc>O
+imap jp <Esc>O
 imap ZZ <Esc>:wq
 
 " save a file after forgetting to sudo
@@ -100,6 +255,9 @@ cmap w!! %!sudo tee > /dev/null %
 
 " Python
 map <leader>g :w<CR>:!python % <CR>
+map <leader>l <Esc>:!pyflakes %<CR>
+map <leader>rs :w<CR>:!scala %<CR>
+
 
 " plugins
 map <leader>r :RainbowParenthesesToggle<cr>
@@ -112,6 +270,24 @@ map! <F1> <C-C><F1>
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc     
 
+"""""""""""""""""
+" RDIO 
+"""""""""""""""""
+" auto make django command
+function! Class()
+    r~/.vim/python/django/new-command.py
+endfunction
+noremap <leader>c :call Class()<CR>
+" Search and replace under cursor
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+nnoremap <leader>sr :!pushd /Users/david/rdio/src && ./sync-rdio.sh && popd<CR>
+nnoremap <leader>sd :!pushd /Users/david/rdio/src && ./sync-data-pipeline.sh && popd<CR>
+nnoremap <leader>sp :!pushd /Users/david/rdio/src && ./sync-reverb-pipeline.sh && popd<CR>
+
+"""
+" Misc
+" """
+nnoremap <leader>, :%s/>>> /<CR>
 
 """"""""""""""""""""""""""
 " File formatting
@@ -155,3 +331,33 @@ set listchars=tab:▸\ ,eol:¬
 "Invisible character colors
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
+
+" Unite
+let g:unite_source_history_yank_enable = 1
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async<cr>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
+nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    -quick-match history/yank<cr>
+nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer -start-insert buffer<cr>
+
+" Data Science Shortcuts
+nnoremap #science :r!cat /Users/david/code/snippets/src/python/snippets/science.py<cr>
+
+" XXX: David remove me! 
+" solarized options 
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_termtrans = 1
+
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+set pastetoggle=<leader>p

@@ -1,10 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/maxlikely/Desktop/core-hello-world/workshop/count-lines-2'
-let g:netrw_dirhist_2='/Users/maxlikely/Dropbox/hackerschool/week ?/core-hello-world/workshop/count-lines-2'
-let g:netrw_dirhist_3='/Users/maxlikely/projects/arabic-semantics'
-let g:netrw_dirhist_4='/Users/maxlikely/projects/arabic-semantics/src'
-let g:netrw_dirhist_5='/Users/maxlikely/projects/arabic-semantics/src/python'
-let g:netrw_dirhist_6='/Users/maxlikely/projects/arabic-semantics/src/python/final scripts'
-let g:netrw_dirhist_7='/Users/maxlikely/projects/7languages/src/scala'
-let g:netrw_dirhist_8='/Users/maxlikely/projects/Graphs.jl/src'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/david/rdio/src/rdio-algorhythms/algorhythms'
+let g:netrw_dirhist_2='/Users/david/rdio/src/rdio-algorhythms/algorhythm'
+let g:netrw_dirhist_3='/Users/david/rdio/src/rdio-algorhythms/examples'
+let g:netrw_dirhist_4='/Users/david/rdio/src/reverb/src/python/algorhythms/algorhythms'
+let g:netrw_dirhist_5='/Users/david/rdio/src/reverb/src/python/algorhythms/examples'
+let g:netrw_dirhist_6='/Users/david/rdio/src/reverb/src/python/algorhythms/algorhythms'
